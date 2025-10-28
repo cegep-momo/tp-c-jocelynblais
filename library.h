@@ -41,6 +41,10 @@ public:
     void displayAllBooks();
     void displayAvailableBooks();
     void displayAllUsers();
+
+    // Méthodes pour afficher les livres en trié par titre/auteur
+    void displayAllBooksSortedByTitle();
+    void displayAllBooksSortedByAuthor();
     
     // Statistics
     int getTotalBooks() const;

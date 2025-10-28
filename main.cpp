@@ -157,8 +157,28 @@ int main() {
                 break;
             }
             
-            case 5: // Display All Books
-                library.displayAllBooks();
+            case 5: // Display All Books  + AJOUT DES OPTIONS DE TRIAGE TITRE/AUTEUR
+                cout << "\n=== AFFICHER TOUS LES LIVRES ===\n";
+                cout << "1. Trier par titre (A-Z)\n";
+                cout << "2. Trier par auteur (A-Z)\n";
+                cout << "3. Ne pas trier\n";
+                cout << "Votre choix : ";
+                int sortChoice;
+                cin >> sortChoice;
+                cin.ignore();
+
+                switch(sortChoice){
+                    case 1:
+                        library.displayAllBooksSortedByTitle();
+                        break;
+                    case 2:
+                        library.displayAllBooksSortedByAuthor();
+                        break;
+                    default:
+                        library.displayAllBooks();
+                        break;
+                }
+
                 pauseForInput();
                 break;
             
