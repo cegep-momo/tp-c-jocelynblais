@@ -2,6 +2,7 @@
 #include <algorithm>
 
 #include "library.h"
+#include "logger.h"
 
 using namespace std;
 
@@ -123,6 +124,10 @@ bool Library::checkOutBook(const string& isbn, const string& userId) {
     if (book && user && book->getAvailability()) {
         book->checkOut(user->getName());
         user->borrowBook(isbn);
+
+        // Ajout de l'événement au journal des logs
+        Logger::logEvent("L'utilisateur \"" + userId + "\" a emprunté \"" + book->getTitle() + "\" (ISBN: " + book->getISBN() + ")");
+
         return true;
     }
     return false;
@@ -136,10 +141,13 @@ bool Library::returnBook(const string& isbn) {
         // Find the user who borrowed this book
         for (auto& user : users) {
             if (user->hasBorrowedBook(isbn)) {
+                Logger::logEvent("L'utilisateur \"" + user->getUserId() + "\" a retourné \"" + book->getTitle() +"\" (ISBN: " + book->getISBN() + ")");
                 user->returnBook(isbn);
                 break;
             }
         }
+
+        Logger::logEvent("Le livre est retourné :" + book->getTitle() +"\" (ISBN: " + book->getISBN() + ")");
         book->returnBook();
         return true;
     }

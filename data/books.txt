@@ -34,8 +34,8 @@ Les Contemplations|Victor Hugo|9782070380932|0|Henri Fabre
 La Légende des siècles|Victor Hugo|9782070380949|1|
 Les Châtiments|Victor Hugo|9782070380956|1|
 L'Art poétique|Nicolas Boileau|9782070380963|0|Sylvie Roux
-Les Caractères|Jean de La Bruyère|9782070380970|1|
+Les Caractères|Jean de La Bruyère|9782070380970|0|Olivier Masson
 Maximes|La Rochefoucauld|9782070380987|1|
 Pensées|Blaise Pascal|9782070380994|0|Nicolas Petit
 Lettres persanes|Montesquieu|9782070381001|1|
-De l'esprit des lois|Montesquieu|9782070381018|1|
+De l'esprit des lois|Montesquieu|9782070381018|0|Valérie Simon

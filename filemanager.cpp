@@ -6,8 +6,8 @@
 using namespace std;
 
 // Constructor
-FileManager::FileManager(const string& booksFile, const string& usersFile)
-    : booksFileName(booksFile), usersFileName(usersFile) {}
+FileManager::FileManager(const string& booksFile, const string& usersFile, const string& logsFile)
+    : booksFileName(booksFile), usersFileName(usersFile), logsFileName(logsFile) {}
 
 // Save all library data
 bool FileManager::saveLibraryData(Library& library) {
@@ -54,6 +54,7 @@ bool FileManager::saveUsersToFile(Library& library) {
     file.close();
     return true;
 }
+
 
 // Load books from file
 bool FileManager::loadBooksFromFile(Library& library) {
@@ -102,6 +103,48 @@ bool FileManager::loadUsersFromFile(Library& library) {
     cout << "Chargé " << count << " utilisateur(s) depuis le fichier.\n";
     return true;
 }
+
+
+// Save logs to file
+bool FileManager::saveLogsToFile() { // FONCTIONNALITÉ POUR LES LOGS
+    ofstream file(logsFileName);
+    if (!file.is_open()) {
+        cout << "Erreur : Impossible d'ouvrir " << logsFileName << " en écriture.\n";
+        return false;
+    }
+    
+    auto logs = Logger::getAllLogs();
+    for (string log : logs) {
+        file << log << "\n";
+    }
+    
+    file.close();
+    return true;
+}
+
+// Load logs from file
+bool FileManager::loadLogsFromFile() { // FONCTIONNALITÉ POUR LES LOGS
+    ifstream file(logsFileName);
+    if (!file.is_open()) {
+        cout << "Aucun fichier de logs existant trouvé.\n";
+        return false;
+    }
+
+    string line;
+    int count = 0;
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            string log;
+            Logger::logEvent(line);
+            count++;
+        }
+    }
+
+    file.close();
+    cout << "Chargé " << count << " évènements depuis le fichier.\n";
+    return true;
+}
+
 
 // Check if file exists
 bool FileManager::fileExists(const string& filename) {

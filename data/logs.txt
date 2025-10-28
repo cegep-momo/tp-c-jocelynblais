@@ -1,0 +1,1 @@
+[Tue Oct 28 20:16:21 2025] L'utilisateur "USR024" a emprunté "Les Caractères" (ISBN: 9782070380970)

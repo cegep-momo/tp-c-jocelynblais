@@ -3,6 +3,7 @@
 #include <string>
 
 #include "library.h"
+#include "logger.h"
 #include "filemanager.h"
 
 using namespace std;
@@ -32,6 +33,7 @@ void displayMenu() {
     cout << "11. Statistiques de la Bibliothèque\n";
     cout << "12. Sauvegarder les Données\n";
     cout << "13. Créer une Sauvegarde\n";
+    cout << "14. Afficher les Logs\n"; // FONCTIONNALITÉ POUR LES LOGS
     cout << "0.  Quitter\n";
     cout << "======================================================\n";
     cout << "Entrez votre choix : ";
@@ -51,6 +53,7 @@ int main() {
     // Load existing data
     cout << "Chargement des données de la bibliothèque...\n";
     fileManager.loadLibraryData(library);
+    fileManager.loadLogsFromFile(); // FONCTIONNALITÉ POUR LES LOGS
     
     int choice;
     bool running = true;
@@ -257,10 +260,19 @@ int main() {
                 pauseForInput();
                 break;
             }
+
+            // FONCTIONNALITÉ POUR LES LOGS
+            case 14: {
+                cout << "\n=== LOGS DE LA BIBLIOTHÈQUE ===\n";
+                cout << Logger::displayLogs();
+                pauseForInput();
+                break;
+            }
             
             case 0: // Exit
                 cout << "Sauvegarde des données avant la fermeture...\n";
                 fileManager.saveLibraryData(library);
+                fileManager.saveLogsToFile();
                 cout << "Merci d'avoir utilisé le Système de Gestion de Bibliothèque Personnelle !\n";
                 running = false;
                 break;
