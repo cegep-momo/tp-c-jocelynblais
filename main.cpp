@@ -87,10 +87,35 @@ int main() {
             case 2: { // Remove Book
                 string isbn = getInput("Entrez l'ISBN du livre à supprimer : ");
                 
-                if (library.removeBook(isbn)) {
-                    cout << "Livre supprimé avec succès !\n";
-                } else {
+
+                // FONCTIONNALITÉS CHOISIS : CONFIRMATION AVANT SUPPRESSION
+
+                // AFFICHER LES INFORMATIONS DU LIVRES POUR ÊTRE SÛR DE BIEN SUPPRIMER LE BONS
+                const Book* bookToDelete = library.findBookByISBN(isbn);
+
+                if(bookToDelete == nullptr){
                     cout << "Livre non trouvé.\n";
+                    pauseForInput();
+                    break;
+                }
+
+                // INFORMATION
+                cout << "\nLivre trouvé :\n";
+                cout << "Titre : " << bookToDelete->getTitle() << endl;
+                cout << "Auteur : " << bookToDelete->getAuthor() << endl;
+                cout << "ISBN : " << bookToDelete->getISBN() << endl;
+                
+                // CONFIRMATION
+                string reponse = getInput("\nVoulez-vous vraiment supprimer ce livre ? (o/n) : ");
+
+                if(reponse == "o" || reponse == "O"){
+                    if (library.removeBook(isbn)) {
+                        cout << "Livre supprimé avec succès !\n";
+                    } else {
+                        cout << "Livre non trouvé.\n";
+                    }
+                }else{
+                    cout << "Suppression annulée. \n";
                 }
                 pauseForInput();
                 break;

@@ -9,7 +9,7 @@ using namespace std;
 Book::Book() : title(""), author(""), isbn(""), isAvailable(true), borrowerName("") {}
 
 // Constructeur avec paramètre
-Book::Book(const string& title, const string& author, const string& isbn): title(title), author(author), isbn(isbn) {}
+Book::Book(const string& title, const string& author, const string& isbn): title(title), author(author), isbn(isbn), isAvailable(true), borrowerName("") {}
 
 // Getters
 string Book::getTitle() const {return title;}
@@ -48,12 +48,12 @@ string Book::toFileFormat() const {
 void Book::fromFileFormat(const string& line){
     stringstream ss(line);
     
-    getline(ss, title, '|');
-    getline(ss, author, '|');
-    getline(ss, isbn, '|');
+    getline(ss, this->title, '|');
+    getline(ss, this->author, '|');
+    getline(ss, this->isbn, '|');
 
     string availableStr;
     getline(ss, availableStr, '|');
     this->setAvailability((availableStr=="0"? false:true));
-    getline(ss, borrowerName, '|');
+    getline(ss, this->borrowerName, '|');
 }
